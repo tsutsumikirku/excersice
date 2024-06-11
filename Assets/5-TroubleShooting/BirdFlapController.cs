@@ -12,19 +12,23 @@ public class BirdFlapController : MonoBehaviour
     /// <summary>スペースキーを押した時に上昇する力</summary>
     [SerializeField] float m_jumpPower = 1f;
     /// <summary>Game Over を表示するオブジェクト</summary>
-    GameObject m_gameoverText = default;
+  [SerializeField] GameObject m_gameoverText = default;
     /// <summary>経過時間を表示するオブジェクト</summary>
     GameObject m_timeText = default;
     /// <summary>ゲームオーバーかどうかを判断するフラグ</summary>
     bool m_isGameover = false;
     Animator m_anim = default;
     Rigidbody2D m_rb = default;
+    Text text;
+    int a = 0;
 
     void Start()
     {
+     
+        m_rb = GetComponent<Rigidbody2D>();
         m_anim = GetComponent<Animator>();
         // シーンから、適切なオブジェクトを検索・取得する
-        m_gameoverText = GameObject.Find("GameOverText");
+       
         m_timeText = GameObject.Find("TimeText");
     }
 
@@ -38,10 +42,11 @@ public class BirdFlapController : MonoBehaviour
         }
 
         // TimeText にプレイ時間を表示する
+        if(a == 0)
         m_timeText.GetComponent<Text>().text = Time.time.ToString("F2");    // F2 で「小数点以下２桁まで」を指定して、実数を文字列に変換する（参考: https://dobon.net/vb/dotnet/string/inttostring.html）
     }
 
-    void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("何かにぶつかった！");
 
@@ -50,5 +55,8 @@ public class BirdFlapController : MonoBehaviour
         // 画面に Game Over と表示する
         Text gameoverText = m_gameoverText.GetComponent<Text>();
         gameoverText.text = "Game Over";
+        a = 1;
+
     }
+   
 }
