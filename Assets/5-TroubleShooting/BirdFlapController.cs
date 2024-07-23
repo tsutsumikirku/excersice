@@ -16,7 +16,7 @@ public class BirdFlapController : MonoBehaviour
     /// <summary>経過時間を表示するオブジェクト</summary>
     GameObject m_timeText = default;
     /// <summary>ゲームオーバーかどうかを判断するフラグ</summary>
-    bool m_isGameover = false;
+  
     Animator m_anim = default;
     Rigidbody2D m_rb = default;
     Text text;
@@ -51,7 +51,7 @@ public class BirdFlapController : MonoBehaviour
         Debug.Log("何かにぶつかった！");
 
         // 何かにぶつかったらゲームオーバーとする
-        m_isGameover = true;
+        
         // 画面に Game Over と表示する
         Text gameoverText = m_gameoverText.GetComponent<Text>();
         gameoverText.text = "Game Over";
